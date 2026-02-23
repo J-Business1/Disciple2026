@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disciple 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- PALETTE DE COULEURS ROYALE --- */
+        :root {
+            --royal-red: #5e0b15;  /* Bordeaux très profond */
+            --gold: #c5a059;       /* Or élégant */
+            --cream: #f9f7f2;      /* Fond papier crème */
+            --white: #ffffff;
+            --text-dark: #1a1a1a;
+            --text-light: #555555;
+        }
+
+        /* --- BASE --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* --- EN-TÊTE (HERO) --- */
+        .hero {
+            background: linear-gradient(180deg, var(--royal-red) 0%, #3a040b 100%);
+            color: var(--white);
+            padding: 4rem 1.5rem 6rem;
+            text-align: center;
+            border-bottom: 4px solid var(--gold);
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .theme-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--gold);
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .verses {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            max-width: 700px;
+            margin: 0 auto;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 15px;
+        }
+
+        /* --- CONTENEUR --- */
+        .container {
+            max-width: 700px;
+            margin: -50px auto 50px; /* Chevauchement élégant */
+            padding: 0 20px;
+        }
+
+        /* --- CARTES (Design épuré) --- */
+        .card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 8px; /* Angles moins ronds pour plus de sérieux */
+            box-shadow: 0 10px 30px rgba(94, 11, 21, 0.08);
+            margin-bottom: 25px;
+            border-top: 3px solid var(--gold);
+        }
+
+        .card-title {
+            color: var(--royal-red);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        /* --- LISTES ET INFOS --- */
+        .info-list {
+            list-style: none;
+        }
+        
+        .info-list li {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            border-left: 3px solid var(--royal-red);
+        }
+
+        .highlight {
+            color: var(--royal-red);
+            font-weight: 600;
+        }
+
+        .zoom-box {
+            background-color: #f4f4f4;
+            padding: 15px;
+            text-align: center;
+            border-radius: 4px;
+            font-weight: 600;
+            color: var(--royal-red);
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+        }
+
+        /* --- FORMULAIRE --- */
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--royal-red);
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+            background: #fafafa;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--gold);
+            background: #fff;
+            outline: none;
+            box-shadow: 0 0 8px rgba(197, 160, 89, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Cases à cocher discrètes */
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 8px;
+            font-size: 0.9rem;
+            color: #666;
+            cursor: pointer;
+        }
+
+        /* BOUTON */
+        .btn-submit {
+            display: block;
+            width: 100%;
+            background-color: var(--royal-red);
+            color: var(--white);
+            padding: 18px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: #3a040b;
+        }
+
+        /* Message succès */
+        #result {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: #e8f5e9;
+            color: #2e7d32;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 0.8rem;
+            color: #888;
+            border-top: 1px solid #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero">
+        <h1>Disciple 2026</h1>
+        <div class="theme-subtitle">
+            « Dieu est fidèle pour le SALUT et la restauration de l’Homme »
+        </div>
+        
+        <div class="verses">
+            Romains 3:3-4 • Michée 5:2-14 • Actes 13:47<br>
+            Matthieu 6:7-10 • Matthieu 7:7-8
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="card">
+            <h2 class="card-title">Programme de Jeûne & Prière</h2>
+            
+            <div class="zoom-box">
+			    Programme de Prière: <br>
+                PRIÈRE MATINALE SUR ZOOM<br>
+                Du lundi au Samedi : 05h30 - 06h30
+            </div>
+			
+			<div class="zoom-box">
+                Programme de Jeûne:<br>
+                Il se fera en deux phase
+            </div>
+
+            <ul class="info-list">
+                <li>
+                    <strong>Phase 1 : Les 3 premières semaines</strong><br>
+                    <span style="font-size: 0.9rem; color: #666;">Jours de jeûne obligatoires : Mercredi & Vendredi.</span>
+                </li>
+                <li>
+                    <strong>Phase 2 : À partir du Lundi 9 Mars 2026</strong><br>
+                    <span class="highlight">Jeûne et prière de toute l’église chaque jour</span> de la semaine (Il s'agit de la Semaine finale du programme).
+                </li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2 class="card-title">Formulaire de témoignage & de sujet personel </h2>
+
+            <form id="form">
+                <input type="hidden" name="access_key" value="40008284-53ab-4aea-ab6c-84769b2a4a44">
+
+                <div class="form-group">
+                    <label for="nom">Votre Nom</label>
+                    <input type="text" id="nom" name="nom" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="commission">Commission (si vous en avez une)</label>
+                    <input type="text" id="commission" name="commission" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="temoignage">Votre Témoignage</label>
+                    <textarea id="temoignage" name="temoignage" class="form-control" placeholder="Partagez ce que Dieu fait..."></textarea>
+                    <label class="checkbox-wrapper">
+                        <input type="checkbox" name="temoignage_anonyme">
+                        Oui, je souhaite que ce témoignage soit partagé publiquement.
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label for="priere">Sujet de Prière</label>
+                    <textarea id="priere" name="sujet_priere" class="form-control" placeholder="Comment pouvons-nous prier pour vous ?"></textarea>
+                    <div style="font-size: 0.8rem; color: #888; margin-top: 5px;">Votre sujet est strictement Confidentiel et n'est soutenu en prière que par le groupe de l'intercession.</div>
+					
+                </div>
+
+                <div class="form-group">
+                    <label for="autre">Autre sujet / Remarque</label>
+                    <textarea id="autre" name="autre_sujet" class="form-control" style="min-height: 80px;" placeholder="Si vous souhaitez aborder un autre point..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="contact">Contact (Tel/Email)</label>
+                    <input type="text" id="contact" name="contact_info" class="form-control" placeholder="Pour un suivi particulier.">
+                </div>
+
+                <button type="submit" class="btn-submit">Valider le formulaire</button>
+            </form>
+            
+            <div id="result"></div>
+        </div>
+
+    </div>
+
+    <footer>
+        Disciple 2026 • Commission de l’Intercession<br>
+        Dieu est fidèle pour le SALUT et la restauration de l’Homme.
+    </footer>
+
+    <script>
+    const form = document.getElementById('form');
+    const result = document.getElementById('result');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const object = Object.fromEntries(formData);
+        const json = JSON.stringify(object);
+        result.innerHTML = "Envoi en cours...";
+        result.style.display = "block";
+
+        fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: json
+            })
+            .then(async (response) => {
+                let json = await response.json();
+                if (response.status == 200) {
+                    result.innerHTML = "Votre formulaire a bien été reçu. Que Dieu vous bénisse !";
+                    result.style.background = "#e8f5e9";
+                    result.style.color = "#2e7d32";
+                    form.reset();
+                } else {
+                    console.log(response);
+                    result.innerHTML = json.message;
+                    result.style.background = "#ffebee";
+                    result.style.color = "#c62828";
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                result.innerHTML = "Une erreur s'est produite.";
+            });
+    });
+    </script>
+
+</body>
